@@ -1,0 +1,1126 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" ,="" initial-scale="1.0"> <!-- this will make sure the webpage fits the device -->
+    <link rel="stylesheet" type="text/css" href="CSS1.css">     <!-- link the CSS and Javascript files to the HTML file (the javascript file wasnt working so I added <script> into this file)-->
+    <script src="Javasciript1.js"></script>
+
+    <title> TicTacToe  </title>         <!-- titel of the web page-->
+</head>
+
+<body>
+    <button class="BackButton" onclick="backButton()"> </button>
+
+    <div class="HeaderContainer" id="TicTac">                   <!-- this is for the title on the web page and below it I have the display current players turn -->
+        <h1 class="headerTicTac"> TicTacToe</h1>
+        <p class="playerTurn">
+            Player X's turn
+        </p>
+    </div>
+
+
+
+    <div class="container">
+        <!-- all of this is to create the game board, I use div classes for the CSS features -->
+        <div class="TicTacBoard">
+            <table class="board">
+                <tbody>
+                    <tr class="row1">
+                        <td>
+                            <button class="Buttons" id="B1" onclick="displayXO1()" value=" ">
+                                <!-- adding the buttons in each cell of the table-->
+                            </button> <div id="R1" style="display: none;"> <span class="XO" id="inputXO1"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B2" onclick="displayXO2()" value=" ">
+                            </button> <div id="R2" style="display: none;"> <span class="XO" id="inputXO2"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B3" onclick="displayXO3()" value=" ">
+                            </button> <div id="R3" style="display: none;"> <span class="XO" id="inputXO3"></span> </div>
+                        </td>
+                    </tr>
+                    <tr class="row2">
+                        <td>
+                            <button class="Buttons" id="B4" onclick="displayXO4()" value=" ">
+                            </button> <div id="R4" style="display: none;"> <span class="XO" id="inputXO4"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B5" onclick="displayXO5()" value=" ">
+                            </button> <div id="R5" style="display: none;"> <span class="XO" id="inputXO5"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B6" onclick="displayXO6()" value=" ">
+                            </button> <div id="R6" style="display: none;"> <span class="XO" id="inputXO6"></span> </div>
+                        </td>
+                    </tr>
+                    <tr class="row3">
+                        <td>
+                            <button class="Buttons" id="B7" onclick="displayXO7()" value=" ">
+                            </button> <div id="R7" style="display: none;"> <span class="XO" id="inputXO7"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B8" onclick="displayXO8()" value=" ">
+                            </button> <div id="R8" style="display: none;"> <span class="XO" id="inputXO8"></span> </div>
+                        </td>
+                        <td>
+                            <button class="Buttons" id="B9" onclick="displayXO9()" value=" ">
+                            </button> <div id="R9" style="display: none;"> <span class="XO" id="inputXO9"></span> </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- for the scorebaord -->
+        <div id="scoreboardContainer">
+            <div id="scoreboard">
+                <table id="scoreTable">
+                    <thead>
+                        <tr>
+                            <th class="Players">Player X</th>
+                            <th class="Players" id="secondPlayer"> Player O</th>        <!-- add the id because we change it when the user changes the game Mode -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="player1-score">0</td>           <!-- score counter -->
+                            <td id="player2-score">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button class="ScoreButton" id="ResetScoreButton" onclick="resetScoreboard()"> Reset Scoreboard </button>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="reset-buttons">
+        <div>
+            <button class="ResetButtons" id="ResetButton" onclick="resetGame()"> Reset </button>
+        </div>
+        <div>
+            <button class="ResetButtons" id="ModeButton" onclick="ChangeMode()"> P v C </button>
+        </div>
+    </div>
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    <!-- start of the javascript code -->
+
+    <script>
+
+
+
+        var player = 1;                             // this will be used to keep track of the current player
+        var moves = 0;                              // this will be used to keep track of the number of moves made
+        var gameOver = false;                       //this will be used to check if the game is over
+        var mode = "PvC";                           //this will be used to keep track of the game mode
+
+
+        function backButton() {                                     //this is used as a back button to go back to the home page. This would have been an additional feature if I had more time
+            window.location.href = "Html(HomePage).html";
+        
+        }
+
+
+        function ChangeMode() {                                                                     //this is used to change the game mode
+            var ModeButton = document.getElementById("ModeButton");                                 //get the button id from the HTML file 
+            if (mode === "PvC hard") {                                                              //if the mode === "PvC hard" then execute the following code 
+                mode = "PvP";                                                                               //change the mode 
+                ModeButton.textContent = "P v P";                                                           //change the text of the button 
+                document.getElementById("secondPlayer").textContent = "Player O";                           //change the text in the scoreboard 
+            }
+            else if (mode === "PvP") {                                                              //if the mode === "PvP" then execute the following code
+                mode = "PvC";
+                ModeButton.textContent = "P v C";
+                document.getElementById("secondPlayer").textContent = "Computer";
+            }
+            else if (mode === "PvC") {
+                mode = "PvC hard";
+                ModeButton.textContent = "P v C(Hard)";
+                document.getElementById("secondPlayer").textContent = "Computer(Hard)";
+            }
+            resetGame();                                                                                    //each time the user changes the mode the game will reset and the scorebaord will reset 
+            resetScoreboard();
+        }
+
+
+
+        function ComputerLogic() {                                                                          //this is the logic for the easy computer AI
+            if (mode === "PvC") {
+                if (player === 2 && !gameOver) {
+                    var availableButtons = [];                                                             //create an array to store the available buttons that can be clicked
+
+                    for (let i = 1; i <= 9; i++) {                                                        //for loop that gets all the available buttons
+                        if (document.getElementById("B" + i)) {
+                            availableButtons.push(i);
+                        }
+                    }
+                }
+                var randomButton = Math.floor(Math.random() * availableButtons.length);                     //get a random button from the available buttons
+                var randomButtonId = "B" + availableButtons[randomButton];
+
+                setTimeout(function () {                                                                    //this is used to delay the computer move by 1000 milliseconds
+                    var text = document.getElementById("R" + availableButtons[randomButton]);               //this gets the random button that the computer has chosen and deletes the button. Then it places "O" in the cell
+                    text.style.display = "block";
+                    var O = "O";
+                    document.getElementById("inputXO" + availableButtons[randomButton]).innerHTML = O;
+                    document.getElementById(randomButtonId).remove();
+
+
+                    player = 1;                                                                             //change player to 1 after the computer has made its move
+                    moves++                                                                                 //add to moves 
+                    updatePlayer();                                                                         //change the current players turn 
+                    checkWinner();                                                                          //check the winner after the computer has made its move
+
+                }, 1000);                                                                                   //how long the delsy is, can be changed 
+            }
+        }
+
+        function ComputerLogicHard() {                                                                      //the logic for the hard computer AI 
+            if (mode === "PvC hard") {
+                if (player === 2 && !gameOver) {
+
+                                                                                                            //this mode will get all the possible winning conditons 
+                    var winConditions = [
+                        [1, 2, 3], [4, 5, 6], [7, 8, 9],            // rows
+                        [1, 4, 7], [2, 5, 8], [3, 6, 9],            // columns
+                        [1, 5, 9], [3, 5, 7]                        // diagonals
+                    ];
+
+                    for (var i = 0; i < winConditions.length; i++) {                                                //this will check if the computer can win in the next move and if it can win, it will win 
+                        var condition = winConditions[i];
+                        var cell1 = document.getElementById("inputXO" + condition[0]).innerHTML;
+                        var cell2 = document.getElementById("inputXO" + condition[1]).innerHTML;
+                        var cell3 = document.getElementById("inputXO" + condition[2]).innerHTML;
+
+                        if (cell1 === "O" && cell1 === cell2 && cell3 === "") {
+
+                            var emptycell = condition[2];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+
+                        }
+                        else if (cell2 === "O" && cell2 === cell3 && cell1 === "") {
+                            var emptycell = condition[0];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+
+                        }
+                        else if (cell1 === "O" && cell1 === cell3 && cell2 === "") {
+                            var emptycell = condition[1];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+
+                        }
+                    }
+
+                    for (var i = 0; i < winConditions.length; i++) {                                            //this checks to see if player 1 can win in the next move and if it can, it will block the player from winning
+                        var condition = winConditions[i];
+                        var cell1 = document.getElementById("inputXO" + condition[0]).innerHTML;
+                        var cell2 = document.getElementById("inputXO" + condition[1]).innerHTML;
+                        var cell3 = document.getElementById("inputXO" + condition[2]).innerHTML;
+
+                        if (cell1 === "X" && cell1 === cell2 && cell3 === "") {
+                            var emptycell = condition[2];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+                        }
+                        else if (cell2 === "X" && cell2 === cell3 && cell1 === "") {
+                            var emptycell = condition[0];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+                        }
+                        else if (cell1 === "X" && cell1 === cell3 && cell2 === "") {
+                            var emptycell = condition[1];
+                            var buttonId = "B" + emptycell;
+                            setTimeout(function () {
+                                document.getElementById("R" + emptycell).style.display = "block";
+                                document.getElementById("inputXO" + emptycell).innerHTML = "O";
+                                document.getElementById(buttonId).remove();
+                                player = 1;
+                                moves++
+                                updatePlayer();
+                                checkWinner();
+
+                            }, 1000);
+                            return;
+                        }
+                    }
+
+                                                                                    //if the computer cannot win or block the player from winning then it will make a random move
+                    var availableButtons = [];
+
+                    for (let i = 1; i <= 9; i++) {                                 
+                        if (document.getElementById("B" + i)) {
+                            availableButtons.push(i);
+                        }
+                    }
+
+                    var randomButton = Math.floor(Math.random() * availableButtons.length);
+                    var randomButtonId = "B" + availableButtons[randomButton];
+
+                    setTimeout(function () {
+                        var text = document.getElementById("R" + availableButtons[randomButton]);
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO" + availableButtons[randomButton]).innerHTML = O;
+                        document.getElementById(randomButtonId).remove();
+
+
+                        player = 1;
+                        moves++
+                        updatePlayer();
+                        checkWinner();
+
+                    }, 1000);
+                }
+            }
+        }
+
+
+
+
+        function updatePlayer() {                                                       //this is used to update the current players turn
+            var playerTurn = document.querySelector('.playerTurn');
+            if (player == 1) {                                                          
+                playerTurn.textContent = "Player X's turn";
+            }
+            else {
+                playerTurn.textContent = "Player O's turn";
+            }
+
+        }
+
+
+        //GAME LOGIC
+
+
+        function displayXO1() {                                                             //each button has its own function for when the button is clicked. So there are 9 displayXO functions
+            if (mode === "PvP") {                                                           //each displayXO function has 3 mode types 
+                if (!gameOver) {                                                            //if the game isnt over 
+                    if (player == 1) {                                                                          //if player is 1 then display X in the cell and remove the button
+                        var text = document.getElementById("R1");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO1").innerHTML = X;
+                        document.getElementById("B1").remove();
+                        player = 2;
+
+
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R1");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO1").innerHTML = O;
+                        document.getElementById("B1").remove();
+                        player = 1;
+                    }
+
+                    moves++;                                                                    //update all necessary variables when player has made thier move
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+
+
+            else if (mode === "PvC") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R1");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO1").innerHTML = X;
+                        document.getElementById("B1").remove();
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();                                                        // if the game mode is PvC then the computer will make its move after the player has made thier move
+
+                    }
+
+
+                }
+
+            }
+
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R1");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO1").innerHTML = X;
+                        document.getElementById("B1").remove();
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+
+                    }
+
+
+                }
+
+            }
+
+
+        }
+
+        function displayXO2() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R2");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO2").innerHTML = X;
+                        document.getElementById("B2").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R2");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO2").innerHTML = O;
+                        document.getElementById("B2").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+
+
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R2");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO2").innerHTML = X;
+                        document.getElementById("B2").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R2");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO2").innerHTML = X;
+                        document.getElementById("B2").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+        }
+
+        function displayXO3() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R3");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO3").innerHTML = X;
+                        document.getElementById("B3").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R3");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO3").innerHTML = O;
+                        document.getElementById("B3").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R3");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO3").innerHTML = X;
+                        document.getElementById("B3").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R3");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO3").innerHTML = X;
+                        document.getElementById("B3").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+        }
+
+
+        function displayXO4() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R4");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO4").innerHTML = X;
+                        document.getElementById("B4").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R4");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO4").innerHTML = O;
+                        document.getElementById("B4").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R4");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO4").innerHTML = X;
+                        document.getElementById("B4").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R4");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO4").innerHTML = X;
+                        document.getElementById("B4").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+
+        }
+
+
+
+        function displayXO5() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R5");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO5").innerHTML = X;
+                        document.getElementById("B5").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R5");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO5").innerHTML = O;
+                        document.getElementById("B5").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R5");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO5").innerHTML = X;
+                        document.getElementById("B5").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R5");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO5").innerHTML = X;
+                        document.getElementById("B5").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+        }
+
+
+        function displayXO6() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R6");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO6").innerHTML = X;
+                        document.getElementById("B6").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R6");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO6").innerHTML = O;
+                        document.getElementById("B6").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R6");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO6").innerHTML = X;
+                        document.getElementById("B6").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R6");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO6").innerHTML = X;
+                        document.getElementById("B6").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+
+        }
+
+
+
+        function displayXO7() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R7");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO7").innerHTML = X;
+                        document.getElementById("B7").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R7");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO7").innerHTML = O;
+                        document.getElementById("B7").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R7");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO7").innerHTML = X;
+                        document.getElementById("B7").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R7");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO7").innerHTML = X;
+                        document.getElementById("B7").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+        }
+
+
+        function displayXO8() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R8");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO8").innerHTML = X;
+                        document.getElementById("B8").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R8");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO8").innerHTML = O;
+                        document.getElementById("B8").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R8");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO8").innerHTML = X;
+                        document.getElementById("B8").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R8");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO8").innerHTML = X;
+                        document.getElementById("B8").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+
+        }
+
+        function displayXO9() {
+            if (mode === "PvP") {
+                if (!gameOver) {
+                    if (player == 1) {
+                        var text = document.getElementById("R9");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO9").innerHTML = X;
+                        document.getElementById("B9").remove();
+                        player = 2;
+                    }
+                    else if (player == 2) {
+                        var text = document.getElementById("R9");
+                        text.style.display = "block";
+                        var O = "O";
+                        document.getElementById("inputXO9").innerHTML = O;
+                        document.getElementById("B9").remove();
+                        player = 1;
+                    }
+                    moves++;
+                    checkWinner();
+                    updatePlayer();
+                }
+            }
+            else if (mode === "PvC") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R9");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO9").innerHTML = X;
+                        document.getElementById("B9").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogic();
+                    }
+                }
+            }
+            else if (mode === "PvC hard") {
+                if (!gameOver) {
+
+                    if (player == 1) {
+                        var text = document.getElementById("R9");
+                        text.style.display = "block";
+                        var X = "X";
+                        document.getElementById("inputXO9").innerHTML = X;
+                        document.getElementById("B9").remove();
+
+
+                        player = 2;
+                        moves++;
+                        checkWinner();
+                        updatePlayer();
+                        ComputerLogicHard();
+                    }
+                }
+            }
+
+        }
+
+
+
+        //WINNNER CONDITIONS
+
+
+        function checkWinner() {                                                                        //like in the computerHard logic, this function gets all the possible winning contitions in an array 
+            var winConditions = [
+                [1, 2, 3], [4, 5, 6], [7, 8, 9],            // rows
+                [1, 4, 7], [2, 5, 8], [3, 6, 9],            // columns
+                [1, 5, 9], [3, 5, 7]                        // diagonals
+            ];
+
+            for (var i = 0; i < winConditions.length; i++) {                                                    //the check to see if a player has won 
+                var condition = winConditions[i];
+                var cell1 = document.getElementById("inputXO" + condition[0]).innerHTML;
+                var cell2 = document.getElementById("inputXO" + condition[1]).innerHTML;
+                var cell3 = document.getElementById("inputXO" + condition[2]).innerHTML;
+
+                if (cell1 !== "" && cell1 === cell2 && cell1 === cell3) {
+
+                    var winner = cell1;                                                                        //get the winner 
+                    revealWinner(condition);
+                    setTimeout(function () {                                                                    //set a delay to reveal the winner 
+                        alert("Player " + (winner === "X" ? 1 : 2) + " wins!");
+                        updateScore(winner === "X" ? 1 : 2);                                                    //update scorebaord 
+                        resetGame();                                                                            //reset the game 
+                    }, 500);
+
+                    gameOver = true;
+                    return;
+                }
+            }
+
+                                                                                                                // Check for a draw
+            if (moves === 9) {                                                                                  //if all possible moves have been used and there is no winner then it is a draw
+                setTimeout(function () {
+                    alert("It's a draw!");
+                    resetGame();
+                }, 500);
+
+                gameOver = true;
+                return;
+            }
+        }
+
+
+
+        function revealWinner(cells) {                                                                      
+            for (var i = 0; i < cells.length; i++) {
+                var cellId = "inputXO" + cells[i];
+                var cell = document.getElementById(cellId);
+                cell.style.display = "block";
+            }
+        }
+
+
+
+        //ALL RESETS
+
+        function resetGame() {                                                  //this is the resetgame button 
+            player = 1;                                                         //reset these variables 
+            moves = 0;
+            for (let i = 1; i <= 9; i++) {                                      // for loop get all the buttons 
+                let buttonId = "B" + i;
+                let displayId = "R" + i;
+                let inputId = "inputXO" + i;
+
+                                                                                // Restore the button, this will add in new buttons if the game is reset
+                let existingButton = document.getElementById(buttonId);
+                if (!existingButton) {
+                    let newButton = document.createElement("button");           //set all the necessary attributes for the buttons 
+                    newButton.setAttribute("class", "Buttons");
+                    newButton.setAttribute("id", buttonId);
+                    newButton.setAttribute("onclick", "displayXO" + i + "()");
+                    newButton.setAttribute("value", " ");
+                    document.querySelector(".row" + Math.ceil(i / 3)).querySelectorAll("td")[i % 3 === 0 ? 2 : i % 3 - 1].appendChild(newButton);       // this will add the buttons to the correct cells in the table
+                }
+                else {
+                                                                                                                                                        // If the button already exists, just reset its value
+                    existingButton.value = " ";
+                }
+                document.getElementById(displayId).style.display = "none";
+
+                                                                                                                                                        // Clear the content of the display area
+
+                document.getElementById(inputId).innerHTML = "";
+
+                gameOver = false;
+
+
+
+            }
+
+            document.querySelector('.playerTurn').textContent = "Player X's turn";                                                                      //set the current player to player X 
+
+        }
+
+        function resetScoreboard() {                                                                                                                    //reset the scorebaord to 0:0 
+            scoreboard.player1 = 0;
+            scoreboard.player2 = 0;
+            updateScoreBoard();
+            saveScoreboard();
+        }
+
+
+        // SCOREBOARD FUNCTIONS 
+
+        var scoreboard = {                                                          
+            "player 1": 0,
+            "player 2": 0
+        };
+
+        function updateScoreBoard() {                                                                       
+
+            document.getElementById("player1-score").textContent = scoreboard.player1;
+            document.getElementById("player2-score").textContent = scoreboard.player2;
+
+        }
+
+        function updateScore(player) {                                      //this will check which player has won and update the scorebaord accordingly
+            if (player === 1) {
+                scoreboard.player1++;
+            }
+            else if (player === 2) {
+                scoreboard.player2++;
+            }
+            updateScoreBoard();
+            saveScoreboard();
+
+        }
+
+        function saveScoreboard() {                                                         //this uses JSON to save the scorebaord to the local storage
+            localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
+        }
+
+        function loadScoreboard() {                                                     // this will load the scorebaord from the local storage
+            var savedScoreboard = localStorage.getItem("scoreboard");                  
+            if (savedScoreboard) {
+                scoreboard = JSON.parse(savedScoreboard);
+                updateScoreBoard();
+            }
+        }
+
+        loadScoreboard();                                                               // this will load the scorebaord when the page is loaded
+
+    </script>
+
+</body>
+</html>

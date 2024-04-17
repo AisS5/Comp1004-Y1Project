@@ -1,0 +1,160 @@
+﻿body {                                                                  /* this is for the background color */
+    min-height: 100vh;
+    background: linear-gradient(45deg, #0085ff, #ff1458);
+}
+
+                                            /* this is for the header and the display current player  */
+.HeaderContainer {
+    text-align: center;                     /* put it in the center of the web page */
+   
+}
+.headerTicTac{
+    font-size: 80px;                                /* set font size */
+    margin-top: 0;                                  /* this sets the barrier around the */
+    margin-bottom: 0;
+    margin-left: 500px;
+    margin-right: 500px;
+    
+    color: aqua;                                    /* set the colour of the title */
+}
+.playerTurn{
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; 
+   
+}
+
+
+
+
+.TicTacBoard{
+    margin: auto; 
+    
+}
+.board {
+    display: flex;
+    flex-direction: column;
+    height: 400px;                                                      /* Set a fixed height for the board . These 2 features will stop the game board from shrinking */
+    width: 400px;                                                       /* Set a fixed width for the board */
+}
+    .board td { 
+        border-radius: 15px;
+        border: solid 2px;
+        background: #ffffff;
+        width: 120px;
+        height: 120px;
+    }
+.row1 {
+    color: #ff0000;                                                     /* in the game board I have set the 3 rows into different colours */
+    text-align: center;
+}
+.row2 {
+    color: #0094ff;
+    text-align: center;
+}
+.row3 {
+    color: #b200ff;
+    text-align: center;
+}
+
+.Buttons {                                                                                      /* this is for the buttons in the table */
+    background: #ffff;
+    height: 100px;                                                                              /* Set a fixed height in pixels */
+    width: 100px;                                                                               /* Set a fixed width in pixels */
+
+    border: none;
+    border-radius: 20px;
+    box-sizing: border-box;
+    font-size: 100px;                                                                           /* set the font size */
+    cursor: pointer;                                                                            /* the cursor will change to pointer when hovering over the buttons */
+}
+
+/* this is for the X and O's  */
+.XO {
+    font-size: 100px;                                                                           /* set font size */
+}
+
+
+/* this is for the SCOREBAORD */
+#scoreboardContainer {
+    margin-left: -425px;                                                                /* set the position for the scoreboard */
+    margin-right: 200px;
+}
+
+#scoreboard {
+    display: inline-block;
+    background-color: transparent;                                          
+    margin: 0;
+}
+#scoreTable {
+    width: 100%;
+    
+}
+    #scoreTable th,
+    #scoreTable td {
+        padding: 5px;
+        border-bottom: 2px solid #fff;
+    }
+    #scoreTable th {
+        text-align: center;
+    }
+    #scoreTable td {
+        text-align: center;
+    }
+
+.Players{
+    font-size: 20px; 
+    color: aqua;
+}
+
+/* this is for the reset scoreboard button */
+.ScoreButton {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+    .ScoreButton:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+
+/* RESETBUTTONS */
+.reset-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.ResetButtons {
+    margin: 5px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+    .ResetButtons:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+.BackButton {
+    padding: 25px 25px; 
+    border-radius: 50%;                             /* makes the button more rounded at the edges  */
+    cursor: pointer;
+                                                                                        /* Add background image */
+    background-image: url("https://cdn-icons-png.flaticon.com/128/5182/5182945.png");
+    background-size: cover;                                                             /* Ensures the image covers the button */
+    background-repeat: no-repeat;                                                       /* Prevents the image from repeating */
+}
